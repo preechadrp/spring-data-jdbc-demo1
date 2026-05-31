@@ -26,7 +26,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	@Query("UPDATE product SET price = :newPrice WHERE id = :id")
 	boolean updatePrice(@Param("id") Long id, @Param("newPrice") BigDecimal newPrice);
 
-	// Spring Data JDBC จะนำผลลัพธ์จาก SQL ไปยัดใส่ ProductSummary ให้เอง
+	// Spring Data JDBC จะนำผลลัพธ์จาก SQL ไปใส่ ProductSummary ให้เอง
 	// โดยดูจากชื่อ Column ที่ตรงกับชื่อตัวแปรใน Record
 	@Query("SELECT id, name FROM product")
 	List<ProductSummary> findAllProductSummaries();
