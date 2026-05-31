@@ -11,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public record Product(
 		@Id Long id,
 
-		@Column("name") // บอก Spring Data JDBC ว่าฟิลด์นี้คือ name ใน Database
+		@Column("NAME") // บอก Spring Data JDBC ว่าฟิลด์นี้คือ name ใน Database
 		String name,
 
 		BigDecimal price) {
