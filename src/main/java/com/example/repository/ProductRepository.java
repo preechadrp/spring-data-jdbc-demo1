@@ -24,7 +24,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	// 3. ถ้าเป็นคำสั่ง Update/Delete ที่เขียน SQL เอง ต้องใส่ @Modifying ด้วย
 	@Modifying
 	@Query("UPDATE product SET price = :newPrice WHERE id = :id")
-	boolean updatePrice(@Param("id") Long id, @Param("newPrice") BigDecimal newPrice);
+	int updatePrice(@Param("id") Long id, @Param("newPrice") BigDecimal newPrice);
 
 	// Spring Data JDBC จะนำผลลัพธ์จาก SQL ไปใส่ ProductSummary ให้เอง
 	// โดยดูจากชื่อ Column ที่ตรงกับชื่อตัวแปรใน Record

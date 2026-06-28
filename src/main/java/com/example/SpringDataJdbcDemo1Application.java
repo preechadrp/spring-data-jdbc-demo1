@@ -40,8 +40,8 @@ public class SpringDataJdbcDemo1Application {
 
 			// == 4. อัปเดตข้อมูลด้วย SQL ตรงๆ ==
 			System.out.println("\n--- Updating Price ---");
-			boolean updated = repository.updatePrice(p1.id(), new BigDecimal("1200.00"));
-			System.out.println("Update success? : " + updated);
+			int effRows = repository.updatePrice(p1.id(), new BigDecimal("1200.00"));
+			System.out.println("Update success? : " + effRows + " row(s) affected.");
 
 			// ดูผลลัพธ์หลังอัปเดต
 			System.out.println("Updated Product: " + repository.findById(p1.id()).orElse(null));

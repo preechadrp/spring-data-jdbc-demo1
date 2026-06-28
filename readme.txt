@@ -1,5 +1,5 @@
 -ทดสอสอบ spring data jdbc
--firebird 5
+-mariadb
 
 ---แนวทางปฏิบัติการว่างโครงสร้างโปรเจ็ค --- 
 com.example.app

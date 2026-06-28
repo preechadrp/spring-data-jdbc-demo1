@@ -8,7 +8,7 @@
 		<encoder>
 			<!-- <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n 
 				</pattern> -->
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{76} - %msg%n</pattern>
 		</encoder>
 	</appender>
 
@@ -30,6 +30,7 @@
 	<logger name="org.springframework" level="info" />
 	<logger name="com.zaxxer.hikari.pool.HikariPool" level="warn" />
 	<logger name="org.hibernate.validator" level="info" />
+	<logger name="org.mariadb.jdbc.client.impl.StandardClient" level="info" />
 
 	<!-- Profile: dev -->
 	<springProfile name="dev">

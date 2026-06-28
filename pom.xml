@@ -67,11 +67,12 @@
             <optional>true</optional>
         </dependency>
         
-		<!-- https://mvnrepository.com/artifact/org.firebirdsql.jdbc/jaybird -->
+		<!-- Source: https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
         <dependency>
-            <groupId>org.firebirdsql.jdbc</groupId>
-            <artifactId>jaybird</artifactId>
-            <version>5.0.6.java11</version>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.5.8</version>
+            <scope>compile</scope>
         </dependency>
         
 	</dependencies>
