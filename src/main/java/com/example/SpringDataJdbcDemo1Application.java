@@ -1,6 +1,7 @@
 package com.example;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,8 +23,8 @@ public class SpringDataJdbcDemo1Application {
 		return (args) -> {
 			// == 1. Insert ข้อมูล ==
 			// ตอน Insert ให้ส่ง ID เป็น null ไปก่อน เพื่อให้ DB รัน Auto-increment เอง
-			Product p1 = new Product(null, "Gaming Mouse", new BigDecimal("1500.00"));
-			Product p2 = new Product(null, "Mechanical Keyboard", new BigDecimal("3500.00"));
+			Product p1 = new Product(null, "Gaming Mouse", new BigDecimal("1500.00"), LocalDateTime.now());
+			Product p2 = new Product(null, "Mechanical Keyboard", new BigDecimal("3500.00"), LocalDateTime.now());
 
 			p1 = repository.save(p1); // สังเกตว่า p1 ตัวใหม่จะได้ ID กลับมาจาก DB
 			repository.save(p2);
