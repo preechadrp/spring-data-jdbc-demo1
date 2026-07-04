@@ -2,6 +2,7 @@ package com.example;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,7 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.example.model.Product;
+import com.example.repository.CustOrderRepository;
 import com.example.repository.ProductRepository;
+import com.fasterxml.uuid.Generators;
 
 @SpringBootApplication
 public class SpringDataJdbcDemo1Application {
@@ -19,7 +22,8 @@ public class SpringDataJdbcDemo1Application {
 	}
 
 	@Bean
-	CommandLineRunner demo(ProductRepository repository) {
+	CommandLineRunner demo(ProductRepository repository,
+			CustOrderRepository custOrderRepository) {
 		return (args) -> {
 			// == 1. Insert ข้อมูล ==
 			// ตอน Insert ให้ส่ง ID เป็น null ไปก่อน เพื่อให้ DB รัน Auto-increment เอง
@@ -51,6 +55,31 @@ public class SpringDataJdbcDemo1Application {
 			System.out.println("\n--- Select some field to record ---");
 			var result = repository.findAllProductSummaries();
 			result.forEach(productSummary -> System.out.println(productSummary));
+
+			//===== ทดสอบการ Insert และ Update ข้อมูลใน CustOrder โดย primary key เรา generate เอง =====
+			UUID newUuid = Generators.timeBasedEpochGenerator().generate();
+
+			var custOrder = new com.example.model.CustOrder()
+					.setOrderId(newUuid.toString())
+					.setCustomerName("John Doe")
+					.setTotalAmount(new BigDecimal("5000.00"));
+			var cust1 = custOrderRepository.save(custOrder);
+			System.out.println("cust1 : " + cust1.getOrderId());
+			String orderId = cust1.getOrderId();
+
+			custOrderRepository.findAll().forEach(order -> {
+
+				//ไม่ต้องอัปเดตตัวล่าสุดที่เพิ่ง Insert เข้าไป
+				if (!orderId.equals(order.getOrderId())) {
+					System.out.println("Order: " + order.getOrderId());
+
+					order.setTotalAmount(new BigDecimal(4000.00));
+					order.setNewRecord(false); // บอกว่าเป็นการอัปเดต ไม่ใช่ Insert
+					custOrderRepository.save(order);
+				}
+
+			});
+
 		};
 	}
 

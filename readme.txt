@@ -1,6 +1,9 @@
 -ทดสอสอบ spring data jdbc
 -mariadb
-
+-ทดสอบการ Insert และ Update ข้อมูลใน Product โดย primary key เราใช้ AUTO_INCREMENT
+-ทดสอบการ Insert และ Update ข้อมูลใน CustOrder โดย primary key เรา generate เอง
+-การสร้างฟิดล์แบบ camel case ในตาราง CustOrder เพื่อให้ spring data jdbc map ข้อมูลได้ถูกต้องซึ่งแปลงจาก camel case เป็น snake case โดยอัตโนมัติ
+-การใช้ java-uuid-generator เพื่อสร้าง UUIDv7 ให้กับ primary key ของ CustOrder
 ---แนวทางปฏิบัติการว่างโครงสร้างโปรเจ็ค --- 
 com.example.app
 ├── controller/       (รับ Request/Response จากภายนอก)
