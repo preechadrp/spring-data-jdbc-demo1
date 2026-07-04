@@ -37,9 +37,7 @@ public class CustOrder implements Persistable<String> {
 
 	@Id
 	private String orderId;
-
 	private String customerName;
-
 	private BigDecimal totalAmount;
 
 }
