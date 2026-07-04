@@ -1,6 +1,7 @@
 package com.example.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.jspecify.annotations.Nullable;
 import org.springframework.data.annotation.Id;
@@ -24,7 +25,7 @@ public class CustOrder implements Persistable<String> {
 
 	@Override
 	public @Nullable String getId() {
-		return orderId;
+		return id;
 	}
 
 	@Transient
@@ -36,8 +37,10 @@ public class CustOrder implements Persistable<String> {
 	}
 
 	@Id
+	private String id;
 	private String orderId;
 	private String customerName;
 	private BigDecimal totalAmount;
+	private LocalDateTime insertDateTime;
 
 }

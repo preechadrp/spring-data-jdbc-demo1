@@ -60,23 +60,21 @@ public class SpringDataJdbcDemo1Application {
 			UUID newUuid = Generators.timeBasedEpochGenerator().generate();
 
 			var custOrder = new com.example.model.CustOrder()
-					.setOrderId(newUuid.toString())
+					.setId(newUuid.toString())
+					.setOrderId("order:" + newUuid.toString().substring(0, 8)) // สร้าง orderId แบบง่ายๆ โดยเอาแค่ 8 ตัวแรกของ UUID
 					.setCustomerName("John Doe")
-					.setTotalAmount(new BigDecimal("5000.00"));
+					.setTotalAmount(new BigDecimal("5000.00"))
+					.setInsertDateTime(LocalDateTime.now());
 			var cust1 = custOrderRepository.save(custOrder);
 			System.out.println("cust1 : " + cust1.getOrderId());
-			String orderId = cust1.getOrderId();
 
-			custOrderRepository.findAll().forEach(order -> {
+			custOrderRepository.findTotalAmount(cust1.getId(), new BigDecimal("5000.00")).forEach(order -> {
 
-				//ไม่ต้องอัปเดตตัวล่าสุดที่เพิ่ง Insert เข้าไป
-				if (!orderId.equals(order.getOrderId())) {
-					System.out.println("Order: " + order.getOrderId());
+				System.out.println("Update order: " + order.getOrderId());
 
-					order.setTotalAmount(new BigDecimal(4000.00));
-					order.setNewRecord(false); // บอกว่าเป็นการอัปเดต ไม่ใช่ Insert
-					custOrderRepository.save(order);
-				}
+				order.setTotalAmount(new BigDecimal(4000.00));
+				order.setNewRecord(false); // บอกว่าเป็นการอัปเดต ไม่ใช่ Insert
+				custOrderRepository.save(order);
 
 			});
 
