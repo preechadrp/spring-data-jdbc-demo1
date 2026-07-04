@@ -14,4 +14,5 @@ com.example.app
 ├── model/            (คลาสหลักของระบบ / Entity ที่ผูกกับตาราง)
 ├── dto/              (POJO ธรรมดา เอาไว้รับส่งข้อมูลกับหน้าเว็บเท่านั้น)
 ├── config/           (พวกไฟล์ตั้งค่าต่างๆ)
+├── component/        (พวก Bean ที่ไม่ใช่ Service / Repository / Controller)
 └── exception/        (ดักจับและจัดการ Error)
