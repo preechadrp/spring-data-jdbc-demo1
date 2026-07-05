@@ -12,5 +12,5 @@ import com.example.model.CustOrder;
 public interface CustOrderRepository extends CrudRepository<CustOrder, String> {
 
 	@Query("SELECT * FROM cust_order WHERE id != :id and total_amount >= :total_amount")
-	List<CustOrder> findTotalAmount(@Param("id") String id, @Param("total_amount") BigDecimal total_amount);
+	List<CustOrder> findTotalAmount(@Param("id") String id, @Param("total_amount") BigDecimal totalAmount);
 }
