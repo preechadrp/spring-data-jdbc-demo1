@@ -22,8 +22,7 @@ public class SpringDataJdbcDemo1Application {
 	}
 
 	@Bean
-	CommandLineRunner demo(ProductRepository repository,
-			CustOrderRepository custOrderRepository) {
+	CommandLineRunner demoProduct(ProductRepository repository) {
 		return (args) -> {
 			// == 1. Insert ข้อมูล ==
 			// ตอน Insert ให้ส่ง ID เป็น null ไปก่อน เพื่อให้ DB รัน Auto-increment เอง
@@ -55,6 +54,13 @@ public class SpringDataJdbcDemo1Application {
 			System.out.println("\n--- Select some field to record ---");
 			var result = repository.findAllProductSummaries();
 			result.forEach(productSummary -> System.out.println(productSummary));
+
+		};
+	}
+
+	@Bean
+	CommandLineRunner demoCustOrder(CustOrderRepository custOrderRepository) {
+		return (args) -> {
 
 			//===== ทดสอบการ Insert และ Update ข้อมูลใน CustOrder โดย primary key เรา generate เอง =====
 			UUID newUuid = Generators.timeBasedEpochGenerator().generate();
