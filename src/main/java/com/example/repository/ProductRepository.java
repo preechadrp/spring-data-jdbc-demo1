@@ -15,7 +15,7 @@ import com.example.model.Product;
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
 	// 1. Spring Data จะเดา SQL ให้จากชื่อ Method (Query Method)
-	List<Product> findByNameContaining(String keyword);
+	List<Product> findByName(String keyword);
 
 	// 2. เขียน SQL เองแบบตรงไปตรงมาด้วย @Query
 	@Query("SELECT * FROM product WHERE price > :minPrice")
