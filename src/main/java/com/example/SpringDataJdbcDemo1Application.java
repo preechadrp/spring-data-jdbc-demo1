@@ -71,6 +71,7 @@ public class SpringDataJdbcDemo1Application {
 					.setCustomerName("John Doe")
 					.setTotalAmount(new BigDecimal("5000.00"))
 					.setInsertDateTime(LocalDateTime.now());
+
 			var cust1 = custOrderRepository.save(custOrder);
 			System.out.println("cust1 : " + cust1.getOrderId());
 
