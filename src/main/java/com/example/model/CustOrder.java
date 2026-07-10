@@ -23,13 +23,13 @@ import lombok.experimental.Accessors;
 @Table("cust_order") // ระบุชื่อ Table ให้ตรงกับใน DB
 public class CustOrder implements Persistable<String> {
 
+	@Transient
+	private boolean isNewRecord = true;
+
 	@Override
 	public @Nullable String getId() {
 		return id;
 	}
-
-	@Transient
-	private boolean isNewRecord = true;
 
 	@Override
 	public boolean isNew() {
