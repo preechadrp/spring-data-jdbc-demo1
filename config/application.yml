@@ -1,0 +1,14 @@
+spring:
+  application:
+      name: spring-data-jdbc-demo1
+  main:
+    #เติมเพื่อปิดการทำงานของ web server
+    web-application-type: none
+  profiles:
+    active: dev  
+  threads:
+    virtual:
+      enabled: true
+
+logging:
+  config: config/logback-spring.xml

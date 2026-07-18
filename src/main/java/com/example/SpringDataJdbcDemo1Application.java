@@ -14,6 +14,9 @@ import com.example.repository.CustOrderRepository;
 import com.example.repository.ProductRepository;
 import com.fasterxml.uuid.Generators;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @SpringBootApplication
 public class SpringDataJdbcDemo1Application {
 
@@ -31,29 +34,29 @@ public class SpringDataJdbcDemo1Application {
 
 			p1 = repository.save(p1); // สังเกตว่า p1 ตัวใหม่จะได้ ID กลับมาจาก DB
 			repository.save(p2);
-			System.out.println("Inserted Product: " + p1);
+			log.info("Inserted Product: " + p1.toString());
 
 			// == 2. Find ข้อมูลทั้งหมด ==
-			System.out.println("\n--- All Products ---");
-			repository.findAll().forEach(product -> System.out.println(product));
+			log.info("--- All Products ---");
+			repository.findAll().forEach(product -> log.info(product.toString()));
 
 			// == 3. ลองใช้ Custom Query แบบระบุราคา ==
-			System.out.println("\n--- Products expensive than 2000 ---");
+			log.info("--- Products expensive than 2000 ---");
 			repository.findExpensiveProducts(new BigDecimal("2000.00"))
-					.forEach(System.out::println);
+					.forEach(product -> log.info(product.toString()));
 
 			// == 4. อัปเดตข้อมูลด้วย SQL ตรงๆ ==
-			System.out.println("\n--- Updating Price ---");
+			log.info("--- Updating Price ---");
 			int effRows = repository.updatePrice(p1.id(), new BigDecimal("1200.00"));
-			System.out.println("Update success? : " + effRows + " row(s) affected.");
+			log.info("Update success? : " + effRows + " row(s) affected.");
 
 			// ดูผลลัพธ์หลังอัปเดต
-			System.out.println("Updated Product: " + repository.findById(p1.id()).orElse(null));
+			log.info("Updated Product: " + repository.findById(p1.id()).orElse(null));
 
 			// ดึงแค่บางฟิลด์เข้า record
-			System.out.println("\n--- Select some field to record ---");
+			log.info("--- Select some field to record ---");
 			var result = repository.findAllProductSummaries();
-			result.forEach(productSummary -> System.out.println(productSummary));
+			result.forEach(productSummary -> log.info(productSummary.toString()));
 
 		};
 	}
@@ -73,11 +76,11 @@ public class SpringDataJdbcDemo1Application {
 					.setInsertDateTime(LocalDateTime.now());
 
 			var cust1 = custOrderRepository.save(custOrder);
-			System.out.println("cust1 : " + cust1.getOrderId());
+			log.info("cust1 : " + cust1.toString());
 
 			custOrderRepository.findTotalAmount(cust1.getId(), new BigDecimal("5000.00")).forEach(order -> {
 
-				System.out.println("Update order: " + order.getOrderId());
+				log.info("Update order: " + order.getOrderId());
 
 				order.setTotalAmount(new BigDecimal(4000.00));
 				order.setNewRecord(false); // บอกว่าเป็นการอัปเดต ไม่ใช่ Insert

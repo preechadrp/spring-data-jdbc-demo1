@@ -13,8 +13,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
+@ToString //เพื่อให้สามารถ print ข้อมูลของ Object ได้ง่ายขึ้น
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
